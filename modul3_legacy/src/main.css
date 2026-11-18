@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --color-brand-jingga: #F26522;
+  --color-brand-kuning: #FFC20E;
+  --color-brand-hitam: #000000;
+  --color-brand-gelap: #111111;
+  --color-brand-putih: #FFFFFF;
+  --color-brand-abu: #9CA3AF;
+}

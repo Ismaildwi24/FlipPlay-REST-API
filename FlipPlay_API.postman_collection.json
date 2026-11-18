@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "b1a2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+		"name": "FlipPlay REST API - Modul 4",
+		"description": "Koleksi Postman resmi untuk pengujian FlipPlay REST API (Modul 4 Pemrograman Web - Laravel 12). Mencakup seluruh skenario Happy Path dan Failure Path sesuai Rubrik Penilaian Demo.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Media (Katalog)",
+			"item": [
+				{
+					"name": "GET All Media (Pagination & Eager Loading)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/media",
+							"host": ["{{base_url}}"],
+							"path": ["media"]
+						},
+						"description": "Menampilkan seluruh media dengan pagination (10 item) dan eager load relasi users yang mengoleksi media."
+					}
+				},
+				{
+					"name": "GET Filter Media by Title (Search)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/media?title=Cyberpunk",
+							"host": ["{{base_url}}"],
+							"path": ["media"],
+							"query": [
+								{
+									"key": "title",
+									"value": "Cyberpunk"
+								}
+							]
+						},
+						"description": "Pencarian media berdasarkan judul menggunakan Query Scope."
+					}
+				},
+				{
+					"name": "GET Filter Media by Aura",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/media?aura=Mind-Bending",
+							"host": ["{{base_url}}"],
+							"path": ["media"],
+							"query": [
+								{
+									"key": "aura",
+									"value": "Mind-Bending"
+								}
+							]
+						},
+						"description": "Filter media berdasarkan vibe/aura."
+					}
+				},
+				{
+					"name": "GET Filter Media by Type (Movie / Anime)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/media?type=Movie",
+							"host": ["{{base_url}}"],
+							"path": ["media"],
+							"query": [
+								{
+									"key": "type",
+									"value": "Movie"
+								}
+							]
+						},
+						"description": "Filter media berdasarkan tipe (Movie atau Anime)."
+					}
+				},
+				{
+					"name": "GET Media by ID (#1 Attack on Titan)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/media/1",
+							"host": ["{{base_url}}"],
+							"path": ["media", "1"]
+						},
+						"description": "Menampilkan detail media dengan Route Model Binding dan whenLoaded users."
+					}
+				},
+				{
+					"name": "GET Media by ID - [Failure Path 404]",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/media/999",
+							"host": ["{{base_url}}"],
+							"path": ["media", "999"]
+						},
+						"description": "Pengujian kegagalan: ID media tidak ditemukan di database, menghasilkan status HTTP 404 Not Found."
+					}
+				},
+				{
+					"name": "POST Create Media (201 Created)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Jujutsu Kaisen Season 2\",\n    \"type\": \"Anime\",\n    \"genres\": [\"Action\", \"Fantasy\", \"Supernatural\"],\n    \"rating\": 8.8,\n    \"release_year\": 2023,\n    \"aura\": \"High-Energy\",\n    \"synopsis\": \"Insiden Shibuya mengguncang dunia jujutsu dan membawa pertarungan dahsyat para penyihir.\",\n    \"episode_count\": 23,\n    \"studio\": \"MAPPA\",\n    \"status\": \"Completed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/media",
+							"host": ["{{base_url}}"],
+							"path": ["media"]
+						},
+						"description": "Menambahkan media baru menggunakan StoreMediaRequest (201 Created)."
+					}
+				},
+				{
+					"name": "POST Create Media - [Failure Path 422 - Field Kosong]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/media",
+							"host": ["{{base_url}}"],
+							"path": ["media"]
+						},
+						"description": "Pengujian kegagalan: Request kosong memicu Form Request Validation error dengan status 422 Unprocessable Entity."
+					}
+				},
+				{
+					"name": "POST Create Media - [Failure Path 422 - Judul Duplikat]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Attack on Titan: Final Season\",\n    \"type\": \"Anime\",\n    \"genres\": [\"Action\"],\n    \"rating\": 9.1,\n    \"release_year\": 2023,\n    \"aura\": \"Binge-Mode\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/media",
+							"host": ["{{base_url}}"],
+							"path": ["media"]
+						},
+						"description": "Pengujian validasi unique: Mengirimkan judul yang sudah terdaftar menghasilkan respons error 422."
+					}
+				},
+				{
+					"name": "PATCH Update Media (200 OK)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 9.3,\n    \"synopsis\": \"Sinopsis baru hasil pembaruan via PATCH request.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/media/1",
+							"host": ["{{base_url}}"],
+							"path": ["media", "1"]
+						},
+						"description": "Memperbarui sebagian data media (PATCH) dengan validasi sometimes (200 OK)."
+					}
+				},
+				{
+					"name": "DELETE Media (200 OK)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/media/7",
+							"host": ["{{base_url}}"],
+							"path": ["media", "7"]
+						},
+						"description": "Menghapus media dari katalog sistem FlipPlay (200 OK)."
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Users & Collections (Relasi & Custom Actions)",
+			"item": [
+				{
+					"name": "GET All Users (with Collections)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": ["{{base_url}}"],
+							"path": ["users"]
+						},
+						"description": "Menampilkan seluruh user beserta koleksi media masing-masing."
+					}
+				},
+				{
+					"name": "GET User by ID (#1 Kenjiro)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/1",
+							"host": ["{{base_url}}"],
+							"path": ["users", "1"]
+						},
+						"description": "Menampilkan detail profil pengguna dan daftar media dalam koleksinya."
+					}
+				},
+				{
+					"name": "GET User Collection Only",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/1/collection",
+							"host": ["{{base_url}}"],
+							"path": ["users", "1", "collection"]
+						},
+						"description": "Custom Endpoint: Menampilkan daftar koleksi milik pengguna spesifik beserta status tonton & rating."
+					}
+				},
+				{
+					"name": "POST Add Media to Collection (Custom Action - 201)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"media_id\": 6,\n    \"status\": \"Watching\",\n    \"user_rating\": 9.5,\n    \"note\": \"Visual Spider-Verse sangat memukau!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/1/collection",
+							"host": ["{{base_url}}"],
+							"path": ["users", "1", "collection"]
+						},
+						"description": "Custom Action: Menambahkan relasi media baru ke dalam koleksi pengguna (attach pivot table)."
+					}
+				},
+				{
+					"name": "POST Add Media to Collection - [Failure Path 409 Conflict]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"media_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/1/collection",
+							"host": ["{{base_url}}"],
+							"path": ["users", "1", "collection"]
+						},
+						"description": "Pengujian kegagalan: Media sudah ada di koleksi user, mengembalikan status HTTP 409 Conflict (sesuai modul)."
+					}
+				},
+				{
+					"name": "POST Add Media to Collection - [Failure Path 422 Media Not Found]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"media_id\": 9999\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/1/collection",
+							"host": ["{{base_url}}"],
+							"path": ["users", "1", "collection"]
+						},
+						"description": "Pengujian validasi exists: media_id tidak valid mengembalikan status 422 Unprocessable Entity."
+					}
+				},
+				{
+					"name": "DELETE Remove Media from Collection (Custom Action - 200)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/1/collection/6",
+							"host": ["{{base_url}}"],
+							"path": ["users", "1", "collection", "6"]
+						},
+						"description": "Custom Action: Menghapus relasi media dari koleksi pengguna (detach pivot table)."
+					}
+				},
+				{
+					"name": "DELETE Remove Media from Collection - [Failure Path 404]",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/1/collection/6",
+							"host": ["{{base_url}}"],
+							"path": ["users", "1", "collection", "6"]
+						},
+						"description": "Pengujian kegagalan: Menghapus media yang tidak ada dalam koleksi pengguna, mengembalikan status HTTP 404 Not Found."
+					}
+				}
+			]
+		}
+	]
+}

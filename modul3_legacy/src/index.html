@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlipPlay - The Vibe Grid | Hiburan Digital</title>
+  <link href="./output.css" rel="stylesheet">
+</head>
+
+<body
+  class="bg-gray-50 text-brand-hitam dark:bg-brand-hitam dark:text-brand-putih font-sans transition-colors duration-300 min-h-screen flex flex-col">
+
+  <!-- NAVBAR SECTION -->
+  <header
+    class="relative bg-white/90 dark:bg-brand-hitam/90 backdrop-blur-md sticky top-0 w-full z-50 border-b border-gray-200 dark:border-zinc-800 transition-colors duration-300">
+
+    <nav class="relative z-10 max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-3xl font-black text-brand-jingga tracking-widest uppercase flex items-center gap-2">
+        <span>FlipPlay</span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <ul class="hidden md:flex gap-8 font-medium text-sm items-center">
+        <li><a href="#hero" class="hover:text-brand-jingga dark:hover:text-brand-kuning transition">Beranda</a></li>
+        <li><a href="#vibe-grid"
+            class="text-brand-jingga dark:text-brand-kuning font-bold flex items-center gap-1.5 transition">
+            <span class="w-2 h-2 rounded-full bg-brand-jingga animate-pulse"></span>
+            The Vibe Grid
+          </a></li>
+        <li><a href="#content" class="hover:text-brand-jingga dark:hover:text-brand-kuning transition">Layanan</a></li>
+        <li><a href="#contact" class="hover:text-brand-jingga dark:hover:text-brand-kuning transition">Kontak</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <!-- Toggle Dark Mode -->
+        <button id="theme-toggle"
+          class="p-2 rounded-full bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-brand-kuning hover:ring-2 ring-brand-jingga transition"
+          aria-label="Toggle Dark Mode">
+          <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <!-- Desktop CTA -->
+        <a href="#vibe-grid"
+          class="hidden sm:inline-flex bg-brand-jingga hover:brightness-110 text-brand-putih px-5 py-2 rounded font-semibold transition text-sm shadow-md">
+          Eksplorasi Vibe
+        </a>
+
+        <!-- Hamburger Button (Mobile Only) -->
+        <button id="mobile-menu-btn"
+          class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-zinc-800 text-gray-800 dark:text-brand-putih hover:text-brand-jingga dark:hover:text-brand-kuning transition border border-gray-200 dark:border-zinc-700"
+          aria-label="Toggle Menu Navigasi" aria-expanded="false">
+          <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Dropdown Navigation Menu -->
+    <div id="mobile-menu"
+      class="hidden md:hidden border-t border-gray-200 dark:border-zinc-800 bg-white/95 dark:bg-brand-hitam/95 backdrop-blur-md px-6 py-5 transition-all duration-300">
+      <ul class="flex flex-col gap-4 font-medium text-base">
+        <li>
+          <a href="#hero"
+            class="mobile-nav-link block py-1.5 hover:text-brand-jingga dark:hover:text-brand-kuning transition">
+            Beranda
+          </a>
+        </li>
+        <li>
+          <a href="#vibe-grid"
+            class="mobile-nav-link flex items-center justify-between py-1.5 text-brand-jingga dark:text-brand-kuning font-bold transition">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-brand-jingga animate-pulse"></span>
+              The Vibe Grid
+            </span>
+            <span
+              class="text-xs px-2 py-0.5 rounded-full bg-brand-jingga/20 text-brand-jingga dark:text-brand-kuning font-semibold">Baru</span>
+          </a>
+        </li>
+        <li>
+          <a href="#content"
+            class="mobile-nav-link block py-1.5 hover:text-brand-jingga dark:hover:text-brand-kuning transition">
+            Layanan
+          </a>
+        </li>
+        <li>
+          <a href="#contact"
+            class="mobile-nav-link block py-1.5 hover:text-brand-jingga dark:hover:text-brand-kuning transition">
+            Kontak
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-5 pt-4 border-t border-gray-200 dark:border-zinc-800">
+        <a href="#vibe-grid"
+          class="mobile-nav-link w-full bg-brand-jingga hover:brightness-110 text-brand-putih py-3 rounded-lg font-bold text-center block text-sm shadow-md transition">
+          Eksplorasi The Vibe Grid
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- HERO SECTION -->
+    <section id="hero"
+      class="relative py-28 md:py-36 flex items-center justify-center text-center px-6 border-b border-gray-200 dark:border-zinc-900 transition-colors duration-300 overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-gray-200/50 to-gray-50 dark:from-brand-gelap/80 dark:via-brand-hitam/90 dark:to-brand-hitam z-0 transition-colors duration-300">
+      </div>
+
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-jingga/15 text-brand-jingga dark:text-brand-kuning text-xs font-bold mb-6 border border-brand-jingga/30">
+          <span class="w-2 h-2 rounded-full bg-brand-jingga animate-ping"></span>
+          Fitur Baru: The Vibe Grid Media Explorer
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight text-gray-900 dark:text-brand-putih">
+          Satu Platform, <span class="text-brand-jingga dark:text-brand-kuning">Ribuan Dunia.</span>
+        </h1>
+        <p class="text-xl md:text-2xl font-medium mb-8 text-gray-700 dark:text-brand-putih">
+          Tonton anime, baca manga, temukan tontonan sesuai suasana hatimu secara instan.
+        </p>
+        <p class="text-gray-500 dark:text-brand-abu mb-8 max-w-xl mx-auto">
+          Jelajahi katalog publik anime terpopuler dengan filter getaran aura dan pencarian real-time di <strong>The
+            Vibe Grid</strong>.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto">
+          <a href="#vibe-grid"
+            class="bg-brand-jingga hover:brightness-110 text-brand-putih font-bold px-8 py-4 rounded text-lg transition flex items-center justify-center gap-2 shadow-xl shadow-brand-jingga/25">
+            <span>Buka The Vibe Grid</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+              </path>
+            </svg>
+          </a>
+          <a href="#content"
+            class="bg-white dark:bg-brand-gelap hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-800 dark:text-brand-putih font-semibold px-6 py-4 rounded text-lg border border-gray-300 dark:border-zinc-700 transition">
+            Layanan Kami
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE VIBE GRID SECTION (STUDI KASUS UTAMA) -->
+    <section id="vibe-grid"
+      class="py-20 px-6 max-w-7xl mx-auto border-b border-gray-200 dark:border-zinc-900 transition-colors duration-300">
+
+      <!-- Section Title & Description -->
+      <div class="text-center mb-12">
+        <span class="text-xs font-black tracking-widest text-brand-jingga dark:text-brand-kuning uppercase">
+          Curated Discovery
+        </span>
+        <h2 class="text-4xl md:text-5xl font-black mt-2 mb-4 text-gray-900 dark:text-brand-putih">
+          The Vibe Grid
+        </h2>
+        <p class="text-gray-600 dark:text-brand-abu max-w-2xl mx-auto text-base md:text-lg">
+          Eksplorasi media hiburan berdasarkan suasana hati (Aura). Cari judul favoritmu secara real-time atau saring
+          dengan tombol Aura pilihanmu.
+        </p>
+      </div>
+
+      <!-- FILTER & SEARCH CONTROL BAR -->
+      <div
+        class="bg-white dark:bg-brand-gelap p-6 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-lg dark:shadow-none mb-10 transition-colors duration-300">
+
+        <!-- 1. Unified Search Input (Real-time Filter) -->
+        <div class="mb-6">
+          <label for="vibe-search-input"
+            class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-brand-abu mb-2">
+            Pencarian Real-Time (Unified Search)
+          </label>
+          <div class="relative">
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400 dark:text-brand-abu">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </span>
+            <input type="text" id="vibe-search-input"
+              placeholder="Ketik judul anime atau genre (contoh: Attack on Titan, Action, Frieren)..."
+              class="w-full bg-gray-50 dark:bg-brand-hitam border border-gray-300 dark:border-zinc-700 rounded-xl pl-12 pr-10 py-3.5 text-gray-900 dark:text-brand-putih focus:outline-none focus:border-brand-jingga dark:focus:border-brand-kuning transition shadow-inner text-sm md:text-base">
+
+            <button id="vibe-search-clear" type="button"
+              class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-brand-jingga dark:hover:text-brand-kuning hidden"
+              title="Bersihkan Pencarian">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Aura-Based Discovery Buttons -->
+        <div>
+          <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-brand-abu">
+              Aura-Based Discovery (Pilih Suasana Hati)
+            </span>
+            <span id="vibe-stat-average" class="text-xs font-semibold text-brand-jingga dark:text-brand-kuning">
+              Rata-rata Rating: ★ 8.7
+            </span>
+          </div>
+
+          <div class="flex flex-wrap gap-2 md:gap-3" id="aura-button-group">
+            <button type="button"
+              class="aura-filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-bold transition flex items-center gap-1.5 shadow-md bg-brand-jingga text-brand-putih border border-brand-jingga ring-2 ring-brand-kuning/50"
+              data-aura="all">
+              <span>🌐</span> Semua Aura
+            </button>
+
+            <button type="button"
+              class="aura-filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-bold transition flex items-center gap-1.5 bg-white dark:bg-brand-gelap text-gray-700 dark:text-brand-abu border border-gray-300 dark:border-zinc-800 hover:border-brand-jingga hover:text-brand-jingga dark:hover:text-brand-kuning"
+              data-aura="high-energy">
+              <span>⚡</span> High Energy
+            </button>
+
+            <button type="button"
+              class="aura-filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-bold transition flex items-center gap-1.5 bg-white dark:bg-brand-gelap text-gray-700 dark:text-brand-abu border border-gray-300 dark:border-zinc-800 hover:border-brand-jingga hover:text-brand-jingga dark:hover:text-brand-kuning"
+              data-aura="melancholy">
+              <span>🌧️</span> Melancholy
+            </button>
+
+            <button type="button"
+              class="aura-filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-bold transition flex items-center gap-1.5 bg-white dark:bg-brand-gelap text-gray-700 dark:text-brand-abu border border-gray-300 dark:border-zinc-800 hover:border-brand-jingga hover:text-brand-jingga dark:hover:text-brand-kuning"
+              data-aura="binge-mode">
+              <span>🍿</span> Binge Mode
+            </button>
+
+            <button type="button"
+              class="aura-filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-bold transition flex items-center gap-1.5 bg-white dark:bg-brand-gelap text-gray-700 dark:text-brand-abu border border-gray-300 dark:border-zinc-800 hover:border-brand-jingga hover:text-brand-jingga dark:hover:text-brand-kuning"
+              data-aura="mind-bending">
+              <span>🌀</span> Mind-Bending
+            </button>
+          </div>
+        </div>
+
+        <!-- Sub-Bar: Counter -->
+        <div
+          class="mt-5 pt-4 border-t border-gray-100 dark:border-zinc-800/80 flex justify-between items-center text-xs text-gray-500 dark:text-brand-abu">
+          <span id="vibe-count">Menyiapkan kurasi The Vibe Grid...</span>
+          <span class="inline-flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Sumber: Kitsu API (Public Anime API)</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 3. LOADING STATE CONTAINER (Animated Skeleton Cards) -->
+      <div id="vibe-loading" class="py-12">
+        <div class="flex flex-col items-center justify-center text-center mb-8">
+          <div class="w-12 h-12 border-4 border-brand-jingga/20 border-t-brand-jingga rounded-full animate-spin mb-4">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 dark:text-brand-putih">Menghubungkan ke The Vibe Grid...</h3>
+          <p class="text-sm text-gray-500 dark:text-brand-abu">Mengambil daftar media secara asinkronus melalui Fetch
+            API</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <!-- 4 Skeleton Cards Loop -->
+          <div
+            class="bg-white dark:bg-brand-gelap rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 p-4 animate-pulse">
+            <div class="aspect-[3/4] bg-gray-200 dark:bg-zinc-800 rounded-lg mb-4"></div>
+            <div class="h-4 bg-gray-200 dark:bg-zinc-800 rounded w-1/3 mb-2"></div>
+            <div class="h-5 bg-gray-200 dark:bg-zinc-800 rounded w-4/5 mb-3"></div>
+            <div class="h-3 bg-gray-200 dark:bg-zinc-800 rounded w-full mb-1.5"></div>
+            <div class="h-3 bg-gray-200 dark:bg-zinc-800 rounded w-2/3"></div>
+          </div>
+          <div
+            class="bg-white dark:bg-brand-gelap rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 p-4 animate-pulse">
+            <div class="aspect-[3/4] bg-gray-200 dark:bg-zinc-800 rounded-lg mb-4"></div>
+            <div class="h-4 bg-gray-200 dark:bg-zinc-800 rounded w-1/3 mb-2"></div>
+            <div class="h-5 bg-gray-200 dark:bg-zinc-800 rounded w-4/5 mb-3"></div>
+            <div class="h-3 bg-gray-200 dark:bg-zinc-800 rounded w-full mb-1.5"></div>
+            <div class="h-3 bg-gray-200 dark:bg-zinc-800 rounded w-2/3"></div>
+          </div>
+          <div
+            class="bg-white dark:bg-brand-gelap rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 p-4 animate-pulse hidden md:block">
+            <div class="aspect-[3/4] bg-gray-200 dark:bg-zinc-800 rounded-lg mb-4"></div>
+            <div class="h-4 bg-gray-200 dark:bg-zinc-800 rounded w-1/3 mb-2"></div>
+            <div class="h-5 bg-gray-200 dark:bg-zinc-800 rounded w-4/5 mb-3"></div>
+            <div class="h-3 bg-gray-200 dark:bg-zinc-800 rounded w-full mb-1.5"></div>
+            <div class="h-3 bg-gray-200 dark:bg-zinc-800 rounded w-2/3"></div>
+          </div>
+          <div
+            class="bg-white dark:bg-brand-gelap rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 p-4 animate-pulse hidden xl:block">
+            <div class="aspect-[3/4] bg-gray-200 dark:bg-zinc-800 rounded-lg mb-4"></div>
+            <div class="h-4 bg-gray-200 dark:bg-zinc-800 rounded w-1/3 mb-2"></div>
+            <div class="h-5 bg-gray-200 dark:bg-zinc-800 rounded w-4/5 mb-3"></div>
+            <div class="h-3 bg-gray-200 dark:bg-zinc-800 rounded w-full mb-1.5"></div>
+            <div class="h-3 bg-gray-200 dark:bg-zinc-800 rounded w-2/3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. ERROR MESSAGE CONTAINER -->
+      <div id="vibe-error" class="hidden py-8">
+        <div
+          class="bg-red-500/10 dark:bg-red-950/30 border border-red-500/40 rounded-2xl p-6 md:p-8 text-center max-w-2xl mx-auto shadow-lg">
+          <div
+            class="w-14 h-14 bg-red-500/20 text-red-500 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+              </path>
+            </svg>
+          </div>
+
+          <h3 class="text-xl font-black text-red-600 dark:text-red-400 mb-2">
+            Pengambilan Data Gagal
+          </h3>
+          <p id="vibe-error-message" class="text-sm text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+            Tidak dapat menghubungi server API publik. Silakan periksa koneksi internet Anda lalu coba lagi.
+          </p>
+
+          <div class="flex justify-center">
+            <button id="vibe-retry-btn"
+              class="bg-brand-jingga hover:brightness-110 text-brand-putih font-bold px-6 py-2.5 rounded-lg transition text-sm flex items-center justify-center gap-2 shadow">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                </path>
+              </svg>
+              Coba Lagi (Retry Fetch)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. GRID CARDS DISPLAY CONTAINER -->
+      <div id="vibe-grid-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Kartu anime akan dirender secara dinamis oleh app.js via template literal -->
+      </div>
+
+      <!-- 6. EMPTY STATE CONTAINER (No Search / Aura Match) -->
+      <div id="vibe-empty" class="hidden py-16 text-center">
+        <div
+          class="w-16 h-16 bg-gray-200 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+          🔍
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 dark:text-brand-putih mb-2">
+          Tidak Ada Anime yang Cocok
+        </h3>
+        <p class="text-sm text-gray-500 dark:text-brand-abu max-w-md mx-auto mb-6">
+          Tidak ditemukan judul yang cocok dengan kata kunci atau Aura yang dipilih. Coba ganti kata pencarian atau
+          kembalikan ke Semua Aura.
+        </p>
+        <button id="vibe-reset-filter"
+          class="bg-brand-jingga hover:brightness-110 text-brand-putih font-bold px-5 py-2.5 rounded-lg text-sm transition">
+          Reset Filter &amp; Tampilkan Semua
+        </button>
+      </div>
+    </section>
+
+    <!-- CONTENT SECTION (LAYANAN UNGGULAN LAINNYA) -->
+    <section id="content"
+      class="py-24 px-6 max-w-7xl mx-auto border-b border-gray-200 dark:border-zinc-900 transition-colors duration-300">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-black mb-4 text-gray-900 dark:text-brand-putih">Layanan Unggulan FlipPlay</h2>
+        <p class="text-gray-600 dark:text-brand-abu max-w-xl mx-auto text-lg">Jelajahi berbagai hiburan digital generasi
+          baru yang dirancang khusus untuk menemani waktu luang Anda.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <article
+          class="bg-white dark:bg-brand-gelap rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 hover:border-brand-jingga dark:hover:border-brand-jingga shadow-md dark:shadow-none transition duration-300 transform hover:-translate-y-1">
+          <video autoplay loop muted playsinline
+            class="w-full h-48 object-cover opacity-90 hover:opacity-100 transition">
+            <source src="./assets/video_stream.mp4" type="video/mp4">
+          </video>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2 text-brand-jingga dark:text-brand-kuning">Video Streaming</h3>
+            <p class="text-gray-600 dark:text-brand-abu">Tonton ribuan episode anime dan drama live-action dengan
+              resolusi 4K dan subtitle Indonesia yang akurat.</p>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article
+          class="bg-white dark:bg-brand-gelap rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 hover:border-brand-jingga dark:hover:border-brand-jingga shadow-md dark:shadow-none transition duration-300 transform hover:-translate-y-1">
+          <img src="https://images.unsplash.com/photo-1613376023733-0a73315d9b06?w=600&h=400&fit=crop"
+            alt="Manga Reading" class="w-full h-48 object-cover opacity-90 hover:opacity-100 transition">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2 text-brand-jingga dark:text-brand-kuning">Digital Reading</h3>
+            <p class="text-gray-600 dark:text-brand-abu">Baca koleksi manga terlengkap dengan antarmuka nyaman di mata,
+              auto-bookmark, dan dark mode.</p>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article
+          class="bg-white dark:bg-brand-gelap rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800 hover:border-brand-jingga dark:hover:border-brand-jingga shadow-md dark:shadow-none transition duration-300 transform hover:-translate-y-1">
+          <img
+            src="https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Light Novel" class="w-full h-48 object-cover opacity-90 hover:opacity-100 transition">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2 text-brand-jingga dark:text-brand-kuning">Light Novel</h3>
+            <p class="text-gray-600 dark:text-brand-abu">Temukan cerita orisinal. Dukung kreator favoritmu dan baca
+              novel ringan secara resmi.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section id="contact"
+      class="py-24 px-6 border-b border-gray-200 dark:border-zinc-900 transition-colors duration-300">
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <h2 class="text-4xl font-black mb-4 text-gray-900 dark:text-brand-putih">Hubungi Tim Kami</h2>
+        <p class="text-gray-600 dark:text-brand-abu">Tertarik berkolaborasi atau mencoba versi Beta? Tinggalkan pesan
+          Anda.</p>
+      </div>
+
+      <form id="contact-form"
+        class="bg-white dark:bg-brand-gelap p-8 md:p-10 rounded-xl max-w-xl mx-auto flex flex-col gap-5 border border-gray-200 dark:border-zinc-800 shadow-xl dark:shadow-none transition-colors duration-300">
+        <div>
+          <label for="nama" class="block text-xs font-semibold text-gray-500 dark:text-brand-abu mb-1">Nama
+            Lengkap</label>
+          <input type="text" id="nama" placeholder="Nama Anda" required
+            class="w-full bg-gray-50 dark:bg-brand-hitam border border-gray-300 dark:border-zinc-700 rounded px-4 py-3.5 focus:outline-none focus:border-brand-jingga dark:focus:border-brand-kuning transition text-gray-900 dark:text-brand-putih">
+        </div>
+
+        <div>
+          <label for="email" class="block text-xs font-semibold text-gray-500 dark:text-brand-abu mb-1">Alamat
+            Email</label>
+          <input type="email" id="email" placeholder="email@contoh.com" required
+            class="w-full bg-gray-50 dark:bg-brand-hitam border border-gray-300 dark:border-zinc-700 rounded px-4 py-3.5 focus:outline-none focus:border-brand-jingga dark:focus:border-brand-kuning transition text-gray-900 dark:text-brand-putih">
+        </div>
+
+        <div>
+          <label for="pesan" class="block text-xs font-semibold text-gray-500 dark:text-brand-abu mb-1">Pesan atau
+            Pertanyaan</label>
+          <textarea id="pesan" rows="4" placeholder="Tulis pesan atau pertanyaan Anda di sini..." required
+            class="w-full bg-gray-50 dark:bg-brand-hitam border border-gray-300 dark:border-zinc-700 rounded px-4 py-3.5 focus:outline-none focus:border-brand-jingga dark:focus:border-brand-kuning transition text-gray-900 dark:text-brand-putih"></textarea>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-brand-jingga hover:brightness-110 text-brand-putih font-bold px-4 py-4 rounded text-lg mt-2 transition shadow-lg">
+          Kirim Pesan
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <!-- MODAL DETAIL ANIME -->
+  <div id="anime-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-brand-hitam/80 backdrop-blur-sm transition-opacity"></div>
+
+    <!-- Modal Dialog Box -->
+    <div
+      class="relative z-10 bg-white dark:bg-brand-gelap border border-gray-300 dark:border-zinc-700 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 md:p-8 transition-colors">
+      <button id="modal-close-btn"
+        class="absolute top-4 right-4 p-2 text-gray-400 hover:text-brand-jingga dark:hover:text-brand-kuning transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="flex flex-col md:flex-row gap-6">
+        <div
+          class="w-full md:w-48 aspect-[3/4] flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-zinc-700">
+          <img id="modal-img" src="" alt="Anime Cover" class="w-full h-full object-cover">
+        </div>
+
+        <div class="flex-grow">
+          <div class="flex items-center gap-2 mb-2">
+            <span
+              class="inline-flex items-center gap-1 bg-brand-hitam/80 text-brand-kuning px-2.5 py-1 rounded text-xs font-bold border border-brand-kuning/30">
+              <svg class="w-3.5 h-3.5 fill-brand-kuning" viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <span id="modal-score">9.0</span>
+            </span>
+            <span id="modal-type"
+              class="bg-brand-jingga text-brand-putih px-2 py-1 rounded text-xs font-semibold">TV</span>
+            <span id="modal-status"
+              class="bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-brand-abu px-2 py-1 rounded text-xs">Selesai</span>
+          </div>
+
+          <h3 id="modal-title" class="text-2xl font-black text-gray-900 dark:text-brand-putih mb-3">
+            Judul Anime
+          </h3>
+
+          <div id="modal-genres" class="flex flex-wrap gap-1.5 mb-4">
+            <!-- Genre Badges dinamis -->
+          </div>
+
+          <div class="text-xs text-gray-500 dark:text-brand-abu mb-4">
+            <span>Episode: <strong id="modal-episodes" class="text-gray-800 dark:text-brand-putih">-</strong></span>
+          </div>
+
+          <h4 class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-brand-abu mb-1.5">Sinopsis</h4>
+          <p id="modal-synopsis"
+            class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed max-h-48 overflow-y-auto pr-2">
+            Sinopsis lengkap anime...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER SECTION -->
+  <footer
+    class="relative overflow-hidden bg-gray-100 dark:bg-brand-gelap text-gray-600 dark:text-brand-abu py-12 px-6 transition-colors duration-300 mt-auto">
+
+    <div
+      class="absolute inset-0 z-0 pointer-events-none opacity-20 dark:opacity-[0.05] bg-[url('./assets/wastra-vanta.jpg')] bg-repeat"
+      style="background-size: 200px;">
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto">
+      <p class="mb-6 hover:text-brand-jingga dark:hover:text-brand-putih transition cursor-pointer font-medium">
+        Pertanyaan? Hubungi Layanan Pelanggan</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-8">
+        <a href="#vibe-grid" class="hover:text-brand-jingga dark:hover:text-brand-kuning transition">The Vibe Grid</a>
+        <a href="#content" class="hover:text-brand-jingga dark:hover:text-brand-kuning transition">Layanan Streaming</a>
+        <a href="#" class="hover:text-brand-jingga dark:hover:text-brand-kuning transition">Pusat Bantuan</a>
+        <a href="#" class="hover:text-brand-jingga dark:hover:text-brand-kuning transition">Ketentuan Penggunaan</a>
+      </div>
+
+      <p class="text-xs">&copy; 2026 FlipPlay Entertainment. Dibangun dengan Kasih Sayang.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIKA UTAMA APLIKASI -->
+  <script src="./app.js"></script>
+
+</body>
+
+</html>
