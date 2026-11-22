@@ -1,23 +1,23 @@
-# FlipPlay REST API — The Vibe Grid (Modul 4 Pemrograman Web)
+# FlipPlay REST API — The Vibe Grid (Web Programming Module 4)
 
-REST API modern berbasis **Laravel 12** yang melanjutkan arsitektur Object-Oriented Programming (OOP) dari **Modul 3** ke dalam arsitektur backend nyata dengan persistensi database MySQL, Eloquent ORM, Relationships Many-to-Many, Form Request Validation, API Resource konsisten, Custom Actions, serta penanganan error lengkap.
+A modern REST API powered by **Laravel 12** that advances the Object-Oriented Programming (OOP) foundation from **Module 3** into a production-grade backend architecture featuring MySQL persistence, Eloquent ORM, Many-to-Many Relationships, Form Request Validation, consistent API Resources, Custom Actions, and comprehensive error handling.
 
 ---
 
-## 📋 Pemenuhan Seluruh Ketentuan Demo & Rubrik Penilaian
+## 📋 Practicum Requirements & Evaluation Rubric Fulfillment
 
-| Aspek Penilaian | Bobot | Ketentuan Praktikum | Implementasi pada Proyek FlipPlay | Status |
+| Assessment Criteria | Weight | Practicum Requirement | FlipPlay Implementation | Status |
 |:---|:---:|:---|:---|:---:|
-| **CRUD API Lengkap** | **20%** | Method `index`, `show`, `store`, `update`, `destroy` dengan HTTP status code tepat (`200 OK`, `201 Created`, dll.). | `MediaController` menerapkan seluruh method CRUD lengkap: `index` (200), `show` (200 / 404), `store` (201), `update` (200), `destroy` (200). | ✅ **LENGKAP** |
-| **Eloquent Relationship** | **20%** | Minimal 2 entitas dengan relasi Eloquent (`belongsToMany`), migration benar dengan pivot table, eager loading (`with()`). | Relasi Many-to-Many antara `Media` dan `User` melalui pivot table `media_user` (dengan kolom tambahan `status`, `user_rating`, `note`). Eager loading diterapkan dengan `with('users')` dan `with('media')`. | ✅ **LENGKAP** |
-| **Form Request Validation** | **15%** | Validasi input (POST/PATCH) di Form Request, pesan kustom dalam bahasa Indonesia, respon status `422 Unprocessable Content`. | `StoreMediaRequest` (aturan `required` saat POST, `sometimes` saat PATCH, `unique:media,title`, validasi numerik) & `AddToCollectionRequest`. | ✅ **LENGKAP** |
-| **API Resource** | **10%** | Format JSON konsisten menggunakan Resource, memanfaatkan conditional attribute dan `whenLoaded()`. | `MediaResource` dan `UserResource` memformat seluruh data output secara seragam dan menyematkan relasi hanya saat di-load (`whenLoaded`). | ✅ **LENGKAP** |
-| **Custom Action di luar CRUD** | **10%** | Aksi khusus relasi antartabel (attach/detach koleksi pengguna) dengan penanganan race condition / duplicate. | `POST /api/users/{user}/collection` (menambahkan media ke koleksi pribadi dengan deteksi duplikat `409 Conflict`), `DELETE /api/users/{user}/collection/{media}` (melepas relasi dari pivot), serta `GET /api/users/{user}/collection`. | ✅ **LENGKAP** |
-| **Pengujian Endpoint** | **5%** | Uji coba happy path & failure path menggunakan Postman. | Disertakan file koleksi Postman siap pakai `FlipPlay_API.postman_collection.json` dan 20 automated tests suite (`php artisan test`). | ✅ **LENGKAP** |
+| **Complete CRUD API** | **20%** | Full `index`, `show`, `store`, `update`, and `destroy` methods with proper HTTP status codes (`200 OK`, `201 Created`, etc.). | `MediaController` implements all standard CRUD methods: `index` (200), `show` (200 / 404), `store` (201), `update` (200), and `destroy` (200). | ✅ **COMPLETED** |
+| **Eloquent Relationship** | **20%** | At least 2 entities with Eloquent relationship (`belongsToMany`), proper migration with pivot table, and eager loading (`with()`). | Many-to-Many relationship between `Media` and `User` via the `media_user` pivot table (with extra attributes `status`, `user_rating`, `note`). Eager loading implemented using `with('users')` and `with('media')`. | ✅ **COMPLETED** |
+| **Form Request Validation** | **15%** | Server-side validation (POST/PATCH) via Form Requests, localized error messages, and `422 Unprocessable Content` response. | `StoreMediaRequest` (`required` on POST, `sometimes` on PATCH, `unique:media,title`, numeric boundaries) & `AddToCollectionRequest`. | ✅ **COMPLETED** |
+| **API Resource** | **10%** | Uniform JSON format using API Resources, leveraging conditional attributes and `whenLoaded()`. | `MediaResource` and `UserResource` serialize consistent output structures and embed relational data only when explicitly loaded (`whenLoaded`). | ✅ **COMPLETED** |
+| **Custom Action Beyond CRUD** | **10%** | Dedicated action modifying relationships (attach/detach user collection) with duplicate/race condition handling. | `POST /api/users/{user}/collection` (attaching media to personal collection with duplicate detection `409 Conflict`), `DELETE /api/users/{user}/collection/{media}` (detaching from pivot), and `GET /api/users/{user}/collection`. | ✅ **COMPLETED** |
+| **Endpoint Testing** | **5%** | Comprehensive testing covering both happy path and failure path using Postman. | Bundled ready-to-import Postman collection `FlipPlay_API.postman_collection.json` and 20 automated test suites (`php artisan test`). | ✅ **COMPLETED** |
 
 ---
 
-## 🗄️ Struktur Database & Relasi Eloquent
+## 🗄️ Database Architecture & Eloquent Relationships
 
 ```text
 ┌───────────────────────────────┐                  ┌────────────────────────────────────────┐
@@ -29,7 +29,7 @@ REST API modern berbasis **Laravel 12** yang melanjutkan arsitektur Object-Orien
 │ email (VARCHAR, UNIQUE)       │        │      │  │ genres (JSON: ["Action", "Sci-Fi"])    │
 │ favorite_aura (VARCHAR)       │        │      │  │ rating (DECIMAL 3,1)                   │
 │ created_at / updated_at       │        │      │  │ release_year (INT)                     │
-└───────────────────────────────┘        │      │  │ aura (VARCHAR: Binge-Mode, dll.)       │
+└───────────────────────────────┘        │      │  │ aura (VARCHAR: Binge-Mode, etc.)       │
                                          │      │  │ synopsis (TEXT)                        │
                                          │      │  │ episode_count, studio, status (Anime)  │
                                          │      │  │ duration_minutes, director, quality    │
@@ -51,45 +51,45 @@ REST API modern berbasis **Laravel 12** yang melanjutkan arsitektur Object-Orien
 
 ---
 
-## 🌐 Daftar Endpoint REST API
+## 🌐 REST API Endpoints Reference
 
-Seluruh endpoint terdaftar di [routes/api.php](file:///C:/Personal/My_Code/TWeb_MD4/routes/api.php):
+All routes are declared in [routes/api.php](routes/api.php):
 
-### 1. Katalog Media (`/api/media`)
+### 1. Media Catalog (`/api/media`)
 
-| Method | Endpoint | Fungsi | Status Code |
+| Method | Endpoint | Description | Status Code |
 |:---|:---|:---|:---:|
-| `GET` | `/api/media` | Mengambil seluruh media (Pagination 10 data & Eager Loading `users`) | `200 OK` |
-| `GET` | `/api/media?title={keyword}` | Mencari media berdasarkan judul / sinopsis (Query Scope `search`) | `200 OK` |
-| `GET` | `/api/media?aura={vibe}` | Filter media berdasarkan aura (Query Scope `byAura`) | `200 OK` |
-| `GET` | `/api/media?type={Anime\|Movie}` | Filter media berdasarkan tipe (Query Scope `byType`) | `200 OK` |
-| `GET` | `/api/media/{id}` | Detail satu media beserta pengguna yang mengoleksinya | `200 OK` / `404 Not Found` |
-| `POST` | `/api/media` | Menambahkan media baru (Validasi `StoreMediaRequest`) | `201 Created` / `422 Unprocessable` |
-| `PATCH` | `/api/media/{id}` | Memperbarui sebagian data media (Validasi `sometimes`) | `200 OK` / `422 Unprocessable` |
-| `DELETE` | `/api/media/{id}` | Menghapus media dari katalog sistem | `200 OK` / `404 Not Found` |
+| `GET` | `/api/media` | Retrieve all media items (Pagination 10 items & Eager Loading `users`) | `200 OK` |
+| `GET` | `/api/media?title={keyword}` | Search media by title or synopsis (Query Scope `search`) | `200 OK` |
+| `GET` | `/api/media?aura={vibe}` | Filter media by aura/vibe (Query Scope `byAura`) | `200 OK` |
+| `GET` | `/api/media?type={Anime\|Movie}` | Filter media by type (Query Scope `byType`) | `200 OK` |
+| `GET` | `/api/media/{id}` | Retrieve single media detail with collectors | `200 OK` / `404 Not Found` |
+| `POST` | `/api/media` | Create new media (Validated by `StoreMediaRequest`) | `201 Created` / `422 Unprocessable` |
+| `PATCH` | `/api/media/{id}` | Partially update media attributes (`sometimes` rules) | `200 OK` / `422 Unprocessable` |
+| `DELETE` | `/api/media/{id}` | Remove media from catalog | `200 OK` / `404 Not Found` |
 
-### 2. Pengguna & Koleksi Pribadi (`/api/users`)
+### 2. Users & Collections (`/api/users`)
 
-| Method | Endpoint | Fungsi | Status Code |
+| Method | Endpoint | Description | Status Code |
 |:---|:---|:---|:---:|
-| `GET` | `/api/users` | Menampilkan seluruh pengguna dan koleksi media | `200 OK` |
-| `GET` | `/api/users/{id}` | Menampilkan profil pengguna beserta seluruh koleksinya | `200 OK` / `404 Not Found` |
-| `POST` | `/api/users` | Mendaftarkan pengguna baru | `201 Created` / `422 Unprocessable` |
-| `GET` | `/api/users/{id}/collection` | **[Custom Action]** Menampilkan khusus daftar koleksi pengguna | `200 OK` |
-| `POST` | `/api/users/{id}/collection` | **[Custom Action]** Menambahkan media ke koleksi pengguna (`attach`) | `201 Created` / `409 Conflict` / `422` |
-| `DELETE` | `/api/users/{id}/collection/{media_id}` | **[Custom Action]** Menghapus media dari koleksi (`detach`) | `200 OK` / `404 Not Found` |
+| `GET` | `/api/users` | List all users along with their saved collections | `200 OK` |
+| `GET` | `/api/users/{id}` | Retrieve user profile with complete media collection | `200 OK` / `404 Not Found` |
+| `POST` | `/api/users` | Register a new user | `201 Created` / `422 Unprocessable` |
+| `GET` | `/api/users/{id}/collection` | **[Custom Action]** Retrieve dedicated collection of a specific user | `200 OK` |
+| `POST` | `/api/users/{id}/collection` | **[Custom Action]** Add media to user collection (`attach`) | `201 Created` / `409 Conflict` / `422` |
+| `DELETE` | `/api/users/{id}/collection/{media_id}` | **[Custom Action]** Remove media from user collection (`detach`) | `200 OK` / `404 Not Found` |
 
 ---
 
-## 🚀 Panduan Setup & Menjalankan Project
+## 🚀 Setup & Execution Guide
 
-### 1. Prasyarat Sistem
-- **PHP** versi 8.2 atau lebih tinggi
-- **Composer** versi 2.x
-- **MySQL** aktif (via Laragon atau XAMPP) pada port 3306
+### 1. Prerequisites
+- **PHP** 8.2 or higher
+- **Composer** 2.x
+- **MySQL** running (via Laragon or XAMPP) on port 3306
 
-### 2. Konfigurasi Environment & Database
-Pastikan MySQL sudah berjalan, buat database `flipplay_db` atau sesuaikan konfigurasi di file `.env`:
+### 2. Environment & Database Configuration
+Ensure MySQL service is active, create database `flipplay_db` or adjust configuration in `.env`:
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -99,40 +99,40 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 3. Migrasi & Seeding Data Awal
-Jalankan migrasi sekaligus seeding data dummy:
+### 3. Run Migrations & Database Seeding
+Execute database migrations and populate seed data:
 ```bash
 php artisan migrate:fresh --seed
 ```
-> Perintah di atas akan membuat tabel `users`, `media`, `media_user` dan mengisinya dengan 7 data media bawaan Modul 3 (Attack on Titan, Cyberpunk: Edgerunners, Your Name, Steins;Gate, Interstellar, Spider-Man: Across the Spider-Verse, La La Land) serta 3 pengguna (`kenjiro`, `aoi_vibes`, `ren_runner`) lengkap beserta koleksi awal.
+> This command creates the `users`, `media`, and `media_user` tables and seeds 7 default media items from Module 3 (Attack on Titan, Cyberpunk: Edgerunners, Your Name, Steins;Gate, Interstellar, Spider-Man: Across the Spider-Verse, La La Land) alongside 3 user profiles (`kenjiro`, `aoi_vibes`, `ren_runner`) with initial collections.
 
-### 4. Jalankan Server Development
+### 4. Start Development Server
 ```bash
 php artisan serve
 ```
-Server API akan aktif pada: `http://127.0.0.1:8000`
+The REST API will be accessible at: `http://127.0.0.1:8000`
 
 ---
 
-## 🧪 Pengujian API (Postman & Automated Tests)
+## 🧪 API Testing (Postman & Automated Tests)
 
-### A. Pengujian via Postman
-File koleksi Postman sudah disediakan pada root project:
-📁 [FlipPlay_API.postman_collection.json](file:///C:/Personal/My_Code/TWeb_MD4/FlipPlay_API.postman_collection.json)
+### A. Testing via Postman
+A pre-configured Postman collection is included in the project root:
+📁 [FlipPlay_API.postman_collection.json](FlipPlay_API.postman_collection.json)
 
-1. Buka aplikasi **Postman**.
-2. Klik tombol **Import** di pojok kiri atas.
-3. Pilih file `FlipPlay_API.postman_collection.json`.
-4. Seluruh request sudah terkelompokkan rapi ke dalam folder:
-   - **1. Media (Katalog)**: Pengujian CRUD lengkap, Query Filters, Happy Path (200, 201), dan Failure Path (404, 422).
-   - **2. Users & Collections**: Pengujian Relasi Many-to-Many, Custom Action `addToCollection`, `removeFromCollection`, Happy Path, dan Failure Path (409 Conflict saat duplikasi koleksi, 404 saat data tidak ditemukan, 422 saat ID salah).
+1. Open **Postman**.
+2. Press **`Ctrl + O`** (or drag & drop the JSON file into Postman).
+3. Select `FlipPlay_API.postman_collection.json`.
+4. All requests are grouped logically:
+   - **1. Media (Katalog)**: Full CRUD operations, Query Filters, Happy Paths (`200`, `201`), and Failure Paths (`404`, `422`).
+   - **2. Users & Collections**: Many-to-Many relations, Custom Actions (`addToCollection`, `removeFromCollection`), Happy Paths, and Failure Paths (`409 Conflict` on duplicates, `404 Not Found`, `422 Unprocessable`).
 
-### B. Pengujian Otomatis (PHPUnit Feature Tests)
-Project ini dilengkapi 20 unit & feature test otomatis yang mencakup 100% skenario penilaian demo:
+### B. Automated Test Suite (PHPUnit Feature Tests)
+The project includes 20 comprehensive unit & feature tests verifying 100% of demo requirements:
 ```bash
 php artisan test
 ```
-Hasil pengujian:
+Execution results:
 ```text
 PASS  Tests\Unit\ExampleTest
 PASS  Tests\Feature\ExampleTest
@@ -140,12 +140,12 @@ PASS  Tests\Feature\MediaApiTest (10 tests)
 PASS  Tests\Feature\UserCollectionApiTest (8 tests)
 
 Tests:    20 passed (143 assertions)
-Duration: ~1.5s
+Duration: ~0.8s
 ```
 
 ---
 
-## 📦 Struktur Folder Laravel
+## 📦 Project Directory Structure
 
 ```text
 TWeb_MD4/
@@ -153,17 +153,17 @@ TWeb_MD4/
 │   ├── Http/
 │   │   ├── Controllers/
 │   │   │   ├── Controller.php
-│   │   │   ├── MediaController.php     <- CRUD Media + Eager Loading + Filter
-│   │   │   └── UserController.php      <- Profil User + Custom Actions Collection
+│   │   │   ├── MediaController.php     <- Media CRUD + Eager Loading + Query Filters
+│   │   │   └── UserController.php      <- User Profiles + Collection Custom Actions
 │   │   ├── Requests/
 │   │   │   ├── StoreMediaRequest.php   <- Form Request Validation (POST & PATCH)
-│   │   │   └── AddToCollectionRequest.php <- Validasi request koleksi
+│   │   │   └── AddToCollectionRequest.php <- Collection validation rules
 │   │   └── Resources/
-│   │       ├── MediaResource.php       <- API Resource format Media (whenLoaded)
-│   │       └── UserResource.php        <- API Resource format User (whenLoaded)
+│   │       ├── MediaResource.php       <- Media JSON format serializer (whenLoaded)
+│   │       └── UserResource.php        <- User JSON format serializer (whenLoaded)
 │   ├── Models/
-│   │   ├── Media.php                   <- Model Eloquent Media (belongsToMany User)
-│   │   └── User.php                    <- Model Eloquent User (belongsToMany Media)
+│   │   ├── Media.php                   <- Media Eloquent Model (belongsToMany User)
+│   │   └── User.php                    <- User Eloquent Model (belongsToMany Media)
 │   └── Providers/
 ├── database/
 │   ├── migrations/
@@ -171,14 +171,14 @@ TWeb_MD4/
 │   │   ├── 2026_01_01_000001_create_media_table.php
 │   │   └── 2026_01_01_000002_create_media_user_table.php <- Pivot Table
 │   └── seeders/
-│       └── DatabaseSeeder.php          <- Seeder data katalog & koleksi awal
+│       └── DatabaseSeeder.php          <- Initial catalog and collection seed data
 ├── routes/
-│   └── api.php                         <- Pendaftaran rute API & Custom Action
+│   └── api.php                         <- REST API routes & custom action endpoints
 ├── tests/
 │   └── Feature/
-│       ├── MediaApiTest.php            <- Test suite CRUD & validasi Media
-│       └── UserCollectionApiTest.php   <- Test suite Relasi & Custom Action
-├── FlipPlay_API.postman_collection.json <- Koleksi Postman siap pakai
-├── modul3_legacy/                      <- Arsip kode simulasi CLI Modul 3
+│       ├── MediaApiTest.php            <- Media CRUD & validation test suites
+│       └── UserCollectionApiTest.php   <- Relational & custom action test suites
+├── FlipPlay_API.postman_collection.json <- Ready-to-import Postman collection
+├── modul3_legacy/                      <- Archived CLI simulation code from Module 3
 └── README.md
 ```
