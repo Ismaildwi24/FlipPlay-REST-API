@@ -9,6 +9,7 @@ use FlipPlay\Models\Media;
 class Library
 {
     private string $name;
+
     private array $mediaItems = [];
 
     public function __construct(string $name = 'FlipPlay Central Library')
@@ -49,6 +50,7 @@ class Library
                 $results[] = $media;
             }
         }
+
         return $results;
     }
 
@@ -62,6 +64,7 @@ class Library
                 $results[] = $media;
             }
         }
+
         return $results;
     }
 
@@ -75,6 +78,7 @@ class Library
                 $results[] = $media;
             }
         }
+
         return $results;
     }
 
@@ -86,7 +90,7 @@ class Library
                 'total' => 0,
                 'animeCount' => 0,
                 'movieCount' => 0,
-                'averageRating' => 0.0
+                'averageRating' => 0.0,
             ];
         }
 
@@ -107,7 +111,7 @@ class Library
             'total' => $total,
             'animeCount' => $animeCount,
             'movieCount' => $movieCount,
-            'averageRating' => round($totalScore / $total, 2)
+            'averageRating' => round($totalScore / $total, 2),
         ];
     }
 
@@ -115,10 +119,11 @@ class Library
     {
         $items = array_values($this->mediaItems);
         usort($items, function (Media $a, Media $b) use ($descending): int {
-            return $descending 
-                ? ($b->getRating() <=> $a->getRating()) 
+            return $descending
+                ? ($b->getRating() <=> $a->getRating())
                 : ($a->getRating() <=> $b->getRating());
         });
+
         return $items;
     }
 
@@ -126,10 +131,11 @@ class Library
     {
         $items = array_values($this->mediaItems);
         usort($items, function (Media $a, Media $b) use ($descending): int {
-            return $descending 
-                ? ($b->getReleaseYear() <=> $a->getReleaseYear()) 
+            return $descending
+                ? ($b->getReleaseYear() <=> $a->getReleaseYear())
                 : ($a->getReleaseYear() <=> $b->getReleaseYear());
         });
+
         return $items;
     }
 }

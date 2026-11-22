@@ -7,11 +7,17 @@ namespace FlipPlay\Models;
 abstract class Media
 {
     protected int $id;
+
     protected string $title;
+
     protected array $genres;
+
     protected float $rating;
+
     protected int $releaseYear;
+
     protected string $aura;
+
     protected string $synopsis;
 
     public function __construct(

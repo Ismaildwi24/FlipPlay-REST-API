@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/app/bootstrap.php';
+require_once __DIR__.'/app/bootstrap.php';
 
 use FlipPlay\Models\Anime;
 use FlipPlay\Models\Movie;
 use FlipPlay\Models\User;
-use FlipPlay\Services\Library;
 use FlipPlay\Services\CLIHelper;
+use FlipPlay\Services\Library;
 
 CLIHelper::printBanner();
 
@@ -116,7 +116,7 @@ $mediaItems = [
         durationMinutes: 152,
         director: 'Christopher Nolan',
         quality: '4K Remastered'
-    )
+    ),
 ];
 
 foreach ($mediaItems as $media) {
@@ -189,14 +189,14 @@ CLIHelper::printSectionHeader(
 
 $animeMedia = $library->findById(1);
 if ($animeMedia !== null) {
-    echo $animeMedia->getDetails() . PHP_EOL;
+    echo $animeMedia->getDetails().PHP_EOL;
 }
 
 echo PHP_EOL;
 
 $movieMedia = $library->findById(5);
 if ($movieMedia !== null) {
-    echo $movieMedia->getDetails() . PHP_EOL;
+    echo $movieMedia->getDetails().PHP_EOL;
 }
 
 CLIHelper::printSectionHeader(
@@ -248,18 +248,18 @@ $user->addToCollection(
 CLIHelper::printSuccess("Menambahkan 'Spider-Man: Across the Spider-Verse' ke koleksi [Status: Rencana Tonton]");
 
 $duplicateAttempt = $user->addToCollection($library->findById(1));
-if (!$duplicateAttempt) {
-    CLIHelper::printWarning("Validasi: Gagal menambahkan media #1 karena sudah ada dalam koleksi pengguna.");
+if (! $duplicateAttempt) {
+    CLIHelper::printWarning('Validasi: Gagal menambahkan media #1 karena sudah ada dalam koleksi pengguna.');
 }
 
 echo PHP_EOL;
-CLIHelper::printInfo("Menampilkan tabel daftar koleksi milik @" . $user->getUsername() . ":");
+CLIHelper::printInfo('Menampilkan tabel daftar koleksi milik @'.$user->getUsername().':');
 CLIHelper::printUserCollectionTable($user->getCollection());
 
 echo PHP_EOL;
-echo CLIHelper::GREEN . CLIHelper::BOLD . "============================================================================" . CLIHelper::RESET . PHP_EOL;
-echo CLIHelper::GREEN . CLIHelper::BOLD . "  [✓] SIMULASI BACKEND OOP FLIPPLAY SELESAI BERJALAN DENGAN SUKSES!        " . CLIHelper::RESET . PHP_EOL;
-echo CLIHelper::GREEN . CLIHelper::BOLD . "============================================================================" . CLIHelper::RESET . PHP_EOL;
+echo CLIHelper::GREEN.CLIHelper::BOLD.'============================================================================'.CLIHelper::RESET.PHP_EOL;
+echo CLIHelper::GREEN.CLIHelper::BOLD.'  [✓] SIMULASI BACKEND OOP FLIPPLAY SELESAI BERJALAN DENGAN SUKSES!        '.CLIHelper::RESET.PHP_EOL;
+echo CLIHelper::GREEN.CLIHelper::BOLD.'============================================================================'.CLIHelper::RESET.PHP_EOL;
 echo PHP_EOL;
 
 $isInteractiveFlag = isset($argv) && (in_array('--interactive', $argv, true) || in_array('-i', $argv, true));
@@ -267,14 +267,14 @@ $isInteractiveFlag = isset($argv) && (in_array('--interactive', $argv, true) || 
 if ($isInteractiveFlag) {
     runInteractiveMode($library, $user);
 } else {
-    echo CLIHelper::CYAN . "💡 Tips Praktikum:" . CLIHelper::RESET . " Jalankan " . CLIHelper::BOLD . "php index.php --interactive" . CLIHelper::RESET . " untuk mencoba eksplorasi menu interaktif CLI secara langsung.\n" . PHP_EOL;
+    echo CLIHelper::CYAN.'💡 Tips Praktikum:'.CLIHelper::RESET.' Jalankan '.CLIHelper::BOLD.'php index.php --interactive'.CLIHelper::RESET." untuk mencoba eksplorasi menu interaktif CLI secara langsung.\n".PHP_EOL;
 }
 
 function runInteractiveMode(Library $library, User $user): void
 {
     while (true) {
         echo PHP_EOL;
-        echo CLIHelper::BG_BLUE . CLIHelper::WHITE . CLIHelper::BOLD . " 🎮 MENU INTERAKTIF FLIPPLAY " . CLIHelper::RESET . PHP_EOL;
+        echo CLIHelper::BG_BLUE.CLIHelper::WHITE.CLIHelper::BOLD.' 🎮 MENU INTERAKTIF FLIPPLAY '.CLIHelper::RESET.PHP_EOL;
         echo "1. Tampilkan Semua Media di Library\n";
         echo "2. Cari Media Berdasarkan Judul\n";
         echo "3. Lihat Detail Lengkap Media (by ID)\n";
@@ -282,7 +282,7 @@ function runInteractiveMode(Library $library, User $user): void
         echo "5. Tampilkan Koleksi Saya\n";
         echo "6. Filter Media Berdasarkan Aura\n";
         echo "0. Keluar dari Program\n";
-        echo "Pilih opsi [0-6]: ";
+        echo 'Pilih opsi [0-6]: ';
 
         $choice = trim((string) fgets(STDIN));
 
@@ -292,39 +292,39 @@ function runInteractiveMode(Library $library, User $user): void
                 break;
 
             case '2':
-                echo "Masukkan kata kunci judul: ";
+                echo 'Masukkan kata kunci judul: ';
                 $query = trim((string) fgets(STDIN));
                 $results = $library->searchByTitle($query);
                 CLIHelper::printMediaTable($results);
                 break;
 
             case '3':
-                echo "Masukkan ID Media: ";
+                echo 'Masukkan ID Media: ';
                 $id = (int) trim((string) fgets(STDIN));
                 $media = $library->findById($id);
                 if ($media !== null) {
-                    echo $media->getDetails() . PHP_EOL;
+                    echo $media->getDetails().PHP_EOL;
                 } else {
                     CLIHelper::printWarning("Media dengan ID #{$id} tidak ditemukan!");
                 }
                 break;
 
             case '4':
-                echo "Masukkan ID Media yang ingin ditambahkan: ";
+                echo 'Masukkan ID Media yang ingin ditambahkan: ';
                 $id = (int) trim((string) fgets(STDIN));
                 $media = $library->findById($id);
                 if ($media === null) {
-                    CLIHelper::printWarning("Media tidak ditemukan.");
+                    CLIHelper::printWarning('Media tidak ditemukan.');
                     break;
                 }
-                echo "Status (1. Plan to Watch / 2. Watching / 3. Completed) [Default: 2]: ";
+                echo 'Status (1. Plan to Watch / 2. Watching / 3. Completed) [Default: 2]: ';
                 $statusInput = trim((string) fgets(STDIN));
                 $status = match ($statusInput) {
                     '1' => 'Plan to Watch',
                     '3' => 'Completed',
                     default => 'Watching'
                 };
-                echo "Beri Rating pribadi (0.0 - 10.0, kosongkan jika belum dinilai): ";
+                echo 'Beri Rating pribadi (0.0 - 10.0, kosongkan jika belum dinilai): ';
                 $rateInput = trim((string) fgets(STDIN));
                 $userRate = is_numeric($rateInput) ? (float) $rateInput : null;
 
@@ -332,7 +332,7 @@ function runInteractiveMode(Library $library, User $user): void
                 if ($added) {
                     CLIHelper::printSuccess("Berhasil menambahkan '{$media->getTitle()}' ke koleksi Anda!");
                 } else {
-                    CLIHelper::printWarning("Media sudah ada di dalam koleksi Anda.");
+                    CLIHelper::printWarning('Media sudah ada di dalam koleksi Anda.');
                 }
                 break;
 
@@ -342,7 +342,7 @@ function runInteractiveMode(Library $library, User $user): void
                 break;
 
             case '6':
-                echo "Pilih Aura (1: High-Energy, 2: Melancholy, 3: Binge-Mode, 4: Mind-Bending): ";
+                echo 'Pilih Aura (1: High-Energy, 2: Melancholy, 3: Binge-Mode, 4: Mind-Bending): ';
                 $auraChoice = trim((string) fgets(STDIN));
                 $auraName = match ($auraChoice) {
                     '1' => 'High-Energy',
@@ -351,20 +351,21 @@ function runInteractiveMode(Library $library, User $user): void
                     '4' => 'Mind-Bending',
                     default => ''
                 };
-                if (!empty($auraName)) {
+                if (! empty($auraName)) {
                     $filtered = $library->filterByAura($auraName);
                     CLIHelper::printMediaTable($filtered);
                 } else {
-                    CLIHelper::printWarning("Pilihan aura tidak valid.");
+                    CLIHelper::printWarning('Pilihan aura tidak valid.');
                 }
                 break;
 
             case '0':
-                echo CLIHelper::CYAN . "Terima kasih telah menggunakan FlipPlay Engine!\n" . CLIHelper::RESET;
+                echo CLIHelper::CYAN."Terima kasih telah menggunakan FlipPlay Engine!\n".CLIHelper::RESET;
+
                 return;
 
             default:
-                CLIHelper::printWarning("Pilihan tidak valid, silakan coba lagi.");
+                CLIHelper::printWarning('Pilihan tidak valid, silakan coba lagi.');
                 break;
         }
     }

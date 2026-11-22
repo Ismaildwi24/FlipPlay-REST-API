@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Media;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,9 +16,6 @@ class MediaApiTest extends TestCase
         $this->seed();
     }
 
-    /**
-     * Test GET /api/media (Index with pagination and eager loading).
-     */
     public function test_can_list_media_with_pagination(): void
     {
         $response = $this->getJson('/api/media');
@@ -38,16 +34,13 @@ class MediaApiTest extends TestCase
                         'synopsis',
                         'created_at',
                         'updated_at',
-                    ]
+                    ],
                 ],
                 'links',
                 'meta',
             ]);
     }
 
-    /**
-     * Test GET /api/media with title search filter.
-     */
     public function test_can_filter_media_by_title(): void
     {
         $response = $this->getJson('/api/media?title=Cyberpunk');
@@ -56,9 +49,6 @@ class MediaApiTest extends TestCase
             ->assertJsonFragment(['title' => 'Cyberpunk: Edgerunners']);
     }
 
-    /**
-     * Test GET /api/media with aura filter.
-     */
     public function test_can_filter_media_by_aura(): void
     {
         $response = $this->getJson('/api/media?aura=Mind-Bending');
@@ -69,23 +59,17 @@ class MediaApiTest extends TestCase
         }
     }
 
-    /**
-     * Test GET /api/media/{id} (Show with Route Model Binding).
-     */
     public function test_can_show_media_detail(): void
     {
         $media = Media::first();
 
-        $response = $this->getJson('/api/media/' . $media->id);
+        $response = $this->getJson('/api/media/'.$media->id);
 
         $response->assertStatus(200)
             ->assertJsonPath('data.id', $media->id)
             ->assertJsonPath('data.title', $media->title);
     }
 
-    /**
-     * Test GET /api/media/999 (Show failure path 404).
-     */
     public function test_returns_404_when_media_not_found(): void
     {
         $response = $this->getJson('/api/media/999999');
@@ -93,9 +77,6 @@ class MediaApiTest extends TestCase
         $response->assertStatus(404);
     }
 
-    /**
-     * Test POST /api/media (Store happy path 201 Created).
-     */
     public function test_can_create_media(): void
     {
         $payload = [
@@ -119,9 +100,6 @@ class MediaApiTest extends TestCase
         $this->assertDatabaseHas('media', ['title' => 'Chainsaw Man']);
     }
 
-    /**
-     * Test POST /api/media failure path (Validation error 422).
-     */
     public function test_validation_fails_when_creating_media_with_missing_fields(): void
     {
         $response = $this->postJson('/api/media', []);
@@ -130,9 +108,6 @@ class MediaApiTest extends TestCase
             ->assertJsonValidationErrors(['title', 'type', 'genres', 'rating', 'release_year', 'aura']);
     }
 
-    /**
-     * Test POST /api/media failure path (Duplicate title 422).
-     */
     public function test_cannot_create_media_with_duplicate_title(): void
     {
         $existing = Media::first();
@@ -150,14 +125,11 @@ class MediaApiTest extends TestCase
             ->assertJsonValidationErrors(['title']);
     }
 
-    /**
-     * Test PATCH /api/media/{id} (Update happy path 200).
-     */
     public function test_can_update_media_partially(): void
     {
         $media = Media::first();
 
-        $response = $this->patchJson('/api/media/' . $media->id, [
+        $response = $this->patchJson('/api/media/'.$media->id, [
             'rating' => 9.5,
         ]);
 
@@ -165,14 +137,11 @@ class MediaApiTest extends TestCase
         $this->assertEquals(9.5, (float) $response->json('data.rating'));
     }
 
-    /**
-     * Test DELETE /api/media/{id} (Destroy happy path 200).
-     */
     public function test_can_delete_media(): void
     {
         $media = Media::first();
 
-        $response = $this->deleteJson('/api/media/' . $media->id);
+        $response = $this->deleteJson('/api/media/'.$media->id);
 
         $response->assertStatus(200)
             ->assertJson(['message' => 'Media berhasil dihapus']);

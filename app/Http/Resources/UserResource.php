@@ -7,11 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -21,7 +16,6 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'favorite_aura' => $this->favorite_aura,
 
-            // Relasi Media: koleksi pribadi pengguna dengan metadata pivot (whenLoaded)
             'media' => $this->whenLoaded('media', function () {
                 return $this->media->map(function ($item) {
                     $mediaData = [

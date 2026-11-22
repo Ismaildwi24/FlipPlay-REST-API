@@ -7,11 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class MediaResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -24,24 +19,21 @@ class MediaResource extends JsonResource
             'aura' => $this->aura,
             'synopsis' => $this->synopsis,
 
-            // Atribut spesifik Anime (Modul 3)
             'anime_details' => $this->when($this->type === 'Anime', [
                 'episode_count' => $this->episode_count,
                 'studio' => $this->studio,
                 'status' => $this->status,
             ]),
 
-            // Atribut spesifik Movie (Modul 3)
             'movie_details' => $this->when($this->type === 'Movie', [
                 'duration_minutes' => $this->duration_minutes,
                 'formatted_duration' => $this->duration_minutes
-                    ? intdiv($this->duration_minutes, 60) . 'j ' . ($this->duration_minutes % 60) . 'm (' . $this->duration_minutes . ' menit)'
+                    ? intdiv($this->duration_minutes, 60).'j '.($this->duration_minutes % 60).'m ('.$this->duration_minutes.' menit)'
                     : null,
                 'director' => $this->director,
                 'quality' => $this->quality,
             ]),
 
-            // Relasi Users yang mengoleksi media ini (whenLoaded)
             'users' => $this->whenLoaded('users', function () {
                 return $this->users->map(function ($user) {
                     $item = [

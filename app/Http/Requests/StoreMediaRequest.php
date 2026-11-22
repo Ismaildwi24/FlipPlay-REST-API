@@ -23,7 +23,7 @@ class StoreMediaRequest extends FormRequest
                 $isPatch ? 'sometimes' : 'required',
                 'string',
                 'max:255',
-                $mediaId ? 'unique:media,title,' . $mediaId : 'unique:media,title',
+                $mediaId ? 'unique:media,title,'.$mediaId : 'unique:media,title',
             ],
             'type' => [
                 $isPatch ? 'sometimes' : 'required',

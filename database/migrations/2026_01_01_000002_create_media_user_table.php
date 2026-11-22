@@ -6,28 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('media_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('media_id')->constrained('media')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('status')->default('Watching'); // 'Watching', 'Completed', 'Plan to Watch', 'Dropped'
+            $table->string('status')->default('Watching');
             $table->decimal('user_rating', 3, 1)->nullable();
             $table->string('note')->nullable();
             $table->timestamps();
 
-            // Memastikan satu user tidak menduplikasi media yang sama di database
             $table->unique(['media_id', 'user_id']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('media_user');

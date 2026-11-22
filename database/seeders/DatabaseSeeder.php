@@ -9,12 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // 1. Data Dummy Pengguna (User)
+
         $kenjiro = User::create([
             'name' => 'Kenjiro Sato',
             'username' => 'kenjiro',
@@ -39,7 +36,6 @@ class DatabaseSeeder extends Seeder
             'favorite_aura' => 'High-Energy',
         ]);
 
-        // 2. Data Dummy Media (Anime & Movie dari FlipPlay Modul 3)
         $aot = Media::create([
             'title' => 'Attack on Titan: Final Season',
             'type' => 'Anime',
@@ -131,7 +127,6 @@ class DatabaseSeeder extends Seeder
             'quality' => '4K Ultra HD',
         ]);
 
-        // 3. Relasi Koleksi Awal Pengguna (Pivot media_user)
         $kenjiro->media()->attach([
             $aot->id => [
                 'status' => 'Completed',

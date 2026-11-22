@@ -7,9 +7,13 @@ namespace FlipPlay\Models;
 class User
 {
     private int $id;
+
     private string $username;
+
     private string $name;
+
     private string $favoriteAura;
+
     private array $collection = [];
 
     public function __construct(
@@ -64,7 +68,7 @@ class User
             'status' => $status,
             'addedAt' => date('Y-m-d H:i'),
             'userRating' => $userRating,
-            'note' => $note
+            'note' => $note,
         ];
 
         return true;
@@ -74,8 +78,10 @@ class User
     {
         if (isset($this->collection[$mediaId])) {
             unset($this->collection[$mediaId]);
+
             return true;
         }
+
         return false;
     }
 

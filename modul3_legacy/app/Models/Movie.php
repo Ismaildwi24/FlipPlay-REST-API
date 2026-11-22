@@ -7,7 +7,9 @@ namespace FlipPlay\Models;
 class Movie extends Media
 {
     private int $durationMinutes;
+
     private string $director;
+
     private string $quality;
 
     public function __construct(
@@ -66,20 +68,20 @@ class Movie extends Media
     public function getDetails(): string
     {
         return sprintf(
-            "============================================================\n" .
-            "  🎬 DETAIL FILM: %s\n" .
-            "============================================================\n" .
-            "  ID Media       : #%d\n" .
-            "  Tipe           : %s\n" .
-            "  Sutradara      : %s\n" .
-            "  Tahun Rilis    : %d\n" .
-            "  Durasi         : %s\n" .
-            "  Kualitas Video : %s\n" .
-            "  Genre          : %s\n" .
-            "  Aura / Vibe    : %s\n" .
-            "  Rating         : %.1f / 10.0 ★\n" .
-            "  Sinopsis       : %s\n" .
-            "============================================================",
+            "============================================================\n".
+            "  🎬 DETAIL FILM: %s\n".
+            "============================================================\n".
+            "  ID Media       : #%d\n".
+            "  Tipe           : %s\n".
+            "  Sutradara      : %s\n".
+            "  Tahun Rilis    : %d\n".
+            "  Durasi         : %s\n".
+            "  Kualitas Video : %s\n".
+            "  Genre          : %s\n".
+            "  Aura / Vibe    : %s\n".
+            "  Rating         : %.1f / 10.0 ★\n".
+            "  Sinopsis       : %s\n".
+            '============================================================',
             $this->title,
             $this->id,
             $this->getType(),

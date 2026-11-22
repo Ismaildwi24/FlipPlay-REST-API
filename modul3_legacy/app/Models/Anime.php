@@ -7,7 +7,9 @@ namespace FlipPlay\Models;
 class Anime extends Media
 {
     private int $episodeCount;
+
     private string $studio;
+
     private string $status;
 
     public function __construct(
@@ -52,19 +54,19 @@ class Anime extends Media
     public function getDetails(): string
     {
         return sprintf(
-            "============================================================\n" .
-            "  📺 DETAIL ANIME: %s\n" .
-            "============================================================\n" .
-            "  ID Media       : #%d\n" .
-            "  Tipe           : %s\n" .
-            "  Studio         : %s\n" .
-            "  Tahun Rilis    : %d\n" .
-            "  Jumlah Episode : %d Episode (%s)\n" .
-            "  Genre          : %s\n" .
-            "  Aura / Vibe    : %s\n" .
-            "  Rating         : %.1f / 10.0 ★\n" .
-            "  Sinopsis       : %s\n" .
-            "============================================================",
+            "============================================================\n".
+            "  📺 DETAIL ANIME: %s\n".
+            "============================================================\n".
+            "  ID Media       : #%d\n".
+            "  Tipe           : %s\n".
+            "  Studio         : %s\n".
+            "  Tahun Rilis    : %d\n".
+            "  Jumlah Episode : %d Episode (%s)\n".
+            "  Genre          : %s\n".
+            "  Aura / Vibe    : %s\n".
+            "  Rating         : %.1f / 10.0 ★\n".
+            "  Sinopsis       : %s\n".
+            '============================================================',
             $this->title,
             $this->id,
             $this->getType(),
